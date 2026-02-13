@@ -1,0 +1,29 @@
+workflows:
+  ios-build:
+    name: iOS build
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      xcode: latest
+      vars:
+        # Update this bundle identifier to match ios/Runner.xcodeproj
+        IOS_BUNDLE_ID: com.example.translatorAppdf
+    scripts:
+      - name: Install dependencies
+        script: |
+          flutter clean
+          flutter pub get
+      - name: Analyze & test
+        script: |
+          flutter analyze
+          flutter test
+      - name: Build iOS IPA (no codesign)
+        script: |
+          flutter build ipa --release --no-codesign
+    artifacts:
+      - build/ios/ipa/*.ipa
+      - build/ios/archive/*.xcarchive
+    publishing:
+      email:
+        recipients:
+          - $CM_EMAIL
