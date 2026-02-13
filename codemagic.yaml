@@ -26,4 +26,4 @@ workflows:
     publishing:
       email:
         recipients:
-          - $CM_EMAIL
+          - royaldelhi44@gmail.com
