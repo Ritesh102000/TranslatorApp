@@ -28,5 +28,9 @@
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>This app uses speech recognition to convert your voice into text for translation.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app uses the microphone to listen to speech and translate it.</string>
 </dict>
 </plist>

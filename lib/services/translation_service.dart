@@ -2,15 +2,23 @@ import 'dart:collection';
 
 import 'package:translator/translator.dart';
 
+abstract class TranslationServiceLike {
+  Future<MultiTranslationResult> translateToTargets({
+    required String text,
+    required Iterable<dynamic> targets,
+  });
+}
+
 /// Coordinates calls to the GoogleTranslator client, automatically detecting
 /// the input language and translating it to the requested targets.
-class TranslationService {
+class TranslationService implements TranslationServiceLike {
   TranslationService({GoogleTranslator? client})
-      : _client = client ?? GoogleTranslator();
+    : _client = client ?? GoogleTranslator();
 
   final GoogleTranslator _client;
   final _cache = HashMap<_TranslationKey, _CachedTranslation>();
 
+  @override
   Future<MultiTranslationResult> translateToTargets({
     required String text,
     required Iterable<dynamic> targets,
@@ -108,9 +116,9 @@ class MultiTranslationResult {
   });
 
   const MultiTranslationResult.empty()
-      : detectedLanguageCode = null,
-        detectedLanguageName = null,
-        translations = const {};
+    : detectedLanguageCode = null,
+      detectedLanguageName = null,
+      translations = const {};
 
   final String? detectedLanguageCode;
   final String? detectedLanguageName;
